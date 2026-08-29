@@ -48,6 +48,27 @@ section[data-testid="stSidebar"] [data-testid="stMarkdownContainer"] p {
     transform: translateY(-1px);
 }
 
+/* Campos de preenchimento: o Streamlit desenha a borda dos campos em branco
+   por padrão (invisível sobre fundo branco/cartão) -- aqui ela vira visível,
+   com um realce claro ao focar */
+div[data-testid="stTextInputRootElement"],
+div[data-testid="stTextAreaRootElement"],
+div[data-testid="stNumberInputContainer"],
+div[data-testid="stDateInputField"],
+div[data-testid="stSelectbox"] div:has(> input) {
+    border: 1px solid #c9a8b2 !important;
+    background-color: #fdfbfa !important;
+    border-radius: 8px !important;
+}
+div[data-testid="stTextInputRootElement"]:focus-within,
+div[data-testid="stTextAreaRootElement"]:focus-within,
+div[data-testid="stNumberInputContainer"]:focus-within,
+div[data-testid="stDateInputField"]:focus-within,
+div[data-testid="stSelectbox"] div:has(> input):focus-within {
+    border-color: #8c2f52 !important;
+    box-shadow: 0 0 0 1px #8c2f52 !important;
+}
+
 /* Cartões: métricas, formulários, expanders e abas com borda/sombra sutis */
 div[data-testid="stMetric"] {
     background: #ffffff;
