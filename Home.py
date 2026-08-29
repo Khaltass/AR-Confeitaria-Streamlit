@@ -75,12 +75,12 @@ def render_home():
 
 
 home_page = st.Page(render_home, title="Início", icon="🏠", default=True)
-config_page = st.Page("pages/1_Configuracoes.py", title="Configurações", icon="⚙️")
-insumos_page = st.Page("pages/2_Insumos.py", title="Insumos", icon="📦")
-receitas_page = st.Page("pages/3_Receitas.py", title="Receitas", icon="📖")
-vendas_page = st.Page("pages/4_Vendas.py", title="Vendas", icon="🛒")
-caixa_page = st.Page("pages/5_Caixa.py", title="Caixa", icon="💰")
-relatorios_page = st.Page("pages/6_Relatorios.py", title="Relatórios", icon="📊")
+config_page = st.Page("app_pages/1_Configuracoes.py", title="Configurações", icon="⚙️")
+insumos_page = st.Page("app_pages/2_Insumos.py", title="Insumos", icon="📦")
+receitas_page = st.Page("app_pages/3_Receitas.py", title="Receitas", icon="📖")
+vendas_page = st.Page("app_pages/4_Vendas.py", title="Vendas", icon="🛒")
+caixa_page = st.Page("app_pages/5_Caixa.py", title="Caixa", icon="💰")
+relatorios_page = st.Page("app_pages/6_Relatorios.py", title="Relatórios", icon="📊")
 
 pg = st.navigation(
     [home_page, config_page, insumos_page, receitas_page, vendas_page, caixa_page, relatorios_page]

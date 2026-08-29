@@ -7,8 +7,11 @@ guardam seu próprio snapshot de custo, então nada do passado muda retroativame
 import bcrypt
 import streamlit as st
 
+from auth import require_login
 from db import ensure_business_config, get_session
 from models import User
+
+require_login()
 
 st.title("⚙️ Configurações do negócio")
 st.caption(

@@ -1,9 +1,12 @@
 """Módulo 1 — Insumos (ingredientes e materiais)."""
 import streamlit as st
 
+from auth import require_login
 from db import get_session
 from format_utils import format_currency, format_datetime, format_number
 from models import Ingredient, IngredientPriceHistory
+
+require_login()
 
 UNITS = ["kg", "g", "L", "ml", "unidade"]
 

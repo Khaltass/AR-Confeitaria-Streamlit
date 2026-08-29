@@ -3,9 +3,12 @@ from datetime import datetime, timedelta, timezone
 
 import streamlit as st
 
+from auth import require_login
 from db import get_session
 from format_utils import format_currency, format_datetime
 from models import CashEntry, ExpenseCategory
+
+require_login()
 
 st.title("💰 Fluxo de caixa")
 st.caption("Entradas e saídas, com saldo por período.")

@@ -5,9 +5,12 @@ from datetime import datetime, timedelta, timezone
 import pandas as pd
 import streamlit as st
 
+from auth import require_login
 from db import get_session
 from format_utils import format_currency, format_datetime, format_number
 from models import PAYMENT_LABELS, CashEntry, Sale
+
+require_login()
 
 st.title("📊 Relatórios")
 st.caption("Histórico completo, gráficos e exportação.")

@@ -5,6 +5,7 @@ cálculo é recalculada a cada interação, antes mesmo de salvar a receita.
 """
 import streamlit as st
 
+from auth import require_login
 from db import ensure_business_config, get_session
 from format_utils import format_currency
 from models import Ingredient, Recipe, RecipeIngredient
@@ -14,6 +15,8 @@ from pricing import (
     calculate_recipe_pricing,
     config_to_pricing_input,
 )
+
+require_login()
 
 st.title("📖 Receitas / Produtos")
 st.caption("Cadastro e cálculo automático de preço de venda.")

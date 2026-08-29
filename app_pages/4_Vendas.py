@@ -3,10 +3,13 @@ from datetime import datetime, timezone
 
 import streamlit as st
 
+from auth import require_login
 from db import ensure_business_config, get_session
 from format_utils import format_currency, format_datetime
 from models import PAYMENT_LABELS, PAYMENT_METHODS, CashEntry, Recipe, Sale
 from pricing import calculate_recipe_pricing, config_to_pricing_input, recipe_to_pricing_input
+
+require_login()
 
 st.title("🛒 Vendas")
 st.caption("Registre cada venda do dia a dia.")
