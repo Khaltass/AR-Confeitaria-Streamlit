@@ -19,7 +19,7 @@ def require_login():
     st.caption("Sistema de gestão")
 
     with st.form("login_form"):
-        username = st.text_input("Usuário", placeholder="amanda")
+        username = st.text_input("Usuário")
         password = st.text_input("Senha", type="password")
         submitted = st.form_submit_button("Entrar", use_container_width=True)
 
