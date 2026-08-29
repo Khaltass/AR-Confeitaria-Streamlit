@@ -84,6 +84,6 @@ relatorios_page = st.Page("app_pages/6_Relatorios.py", title="Relatórios", icon
 conta_page = st.Page("app_pages/7_Conta.py", title="Minha conta", icon="👤")
 
 pg = st.navigation(
-    [home_page, config_page, insumos_page, receitas_page, vendas_page, caixa_page, relatorios_page, conta_page]
+    [home_page, receitas_page, vendas_page, caixa_page, insumos_page, relatorios_page, config_page, conta_page]
 )
 pg.run()
