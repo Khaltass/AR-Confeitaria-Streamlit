@@ -10,10 +10,12 @@ from auth import logout_button, require_login
 from db import ensure_business_config, get_session
 from format_utils import format_currency, format_datetime, format_number
 from models import Sale, CashEntry
+from pwa import enable_pwa
 from theme import apply_theme
 
 st.set_page_config(page_title="A.R Confeitaria", page_icon="🧁", layout="centered")
 apply_theme()
+enable_pwa()
 
 require_login()
 logout_button()
