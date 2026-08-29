@@ -27,10 +27,18 @@ Acesse **http://localhost:8501**.
 
 ### Login (criado pelo seed)
 
-- **Usuário:** `amanda`
-- **Senha:** `lucky123`
+Definido pelas variáveis de ambiente `LOGIN_USERNAME` e `LOGIN_PASSWORD` — defina-as antes de rodar `python seed.py`:
 
-Esses valores vêm de `LOGIN_USERNAME` e `LOGIN_PASSWORD` (variáveis de ambiente) — defina-as antes de rodar `python seed.py` para usar outro usuário/senha. O seed apaga qualquer login anterior e cria só esse.
+```bash
+# Windows PowerShell
+$env:LOGIN_USERNAME="seu-usuario"
+$env:LOGIN_PASSWORD="sua-senha-forte"
+python seed.py
+```
+
+Se `LOGIN_PASSWORD` não for definida, o seed gera uma senha aleatória e imprime no terminal (não fica salva em nenhum arquivo). O seed apaga qualquer login anterior e cria só esse.
+
+Para trocar a senha depois **sem apagar dados reais**, use `python rotate_login_password.py <usuario>` em vez de rodar o seed de novo.
 
 ## Publicar no Streamlit Community Cloud
 

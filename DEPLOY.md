@@ -25,8 +25,8 @@ Antes (ou depois) de publicar, rode o seed **uma única vez** apontando para o P
 ```bash
 # Windows PowerShell
 $env:DATABASE_URL="postgresql://postgres:SENHA@db.SEUPROJETO.supabase.co:5432/postgres"
-$env:LOGIN_USERNAME="amanda"
-$env:LOGIN_PASSWORD="lucky123"
+$env:LOGIN_USERNAME="seu-usuario"
+$env:LOGIN_PASSWORD="sua-senha-forte"
 python seed.py
 ```
 
@@ -46,8 +46,15 @@ python seed.py
 
 ## 5. Pronto
 
-O Streamlit te dá uma URL tipo `ar-confeitaria.streamlit.app`. Acesse e entre com `amanda` / `lucky123` (ou o que você tiver definido no passo 3).
+O Streamlit te dá uma URL tipo `ar-confeitaria.streamlit.app`. Acesse e entre com o usuário/senha que você definiu no passo 3.
 
 ## Trocar a senha depois
 
-Rode o seed de novo (passo 3) só se quiser **resetar tudo**. Para só trocar a senha sem apagar dados reais, é preciso atualizar o hash diretamente no banco (posso te ajudar com isso quando precisar).
+Rode o seed de novo (passo 3) só se quiser **resetar tudo**. Para só trocar a senha sem apagar dados reais, use:
+
+```bash
+$env:DATABASE_URL="postgresql://..."
+python rotate_login_password.py seu-usuario
+```
+
+Se você não definir `NEW_LOGIN_PASSWORD`, o script gera uma senha aleatória forte e imprime uma única vez no terminal.

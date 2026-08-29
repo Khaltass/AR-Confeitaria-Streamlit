@@ -9,6 +9,7 @@ quanto contra o Postgres de produção (defina DATABASE_URL no ambiente antes de
 os dados de exemplo. Rode só no início — nunca depois de já ter dados reais.
 """
 import os
+import secrets
 import sys
 
 if sys.platform == "win32":
@@ -34,6 +35,11 @@ from models import (
 from pricing import calculate_recipe_pricing, config_to_pricing_input, recipe_to_pricing_input
 
 
+def generate_password() -> str:
+    alphabet = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789"
+    return "".join(secrets.choice(alphabet) for _ in range(14))
+
+
 def get_engine():
     url = os.environ.get("DATABASE_URL")
     if url:
@@ -57,11 +63,17 @@ def main():
 
     # ---------- Usuário (login) ----------
     login_username = os.environ.get("LOGIN_USERNAME", "amanda").strip().lower()
-    login_password = os.environ.get("LOGIN_PASSWORD", "lucky123")
+    login_password = os.environ.get("LOGIN_PASSWORD")
+    password_was_generated = login_password is None
+    if password_was_generated:
+        login_password = generate_password()
     password_hash = bcrypt.hashpw(login_password.encode("utf-8"), bcrypt.gensalt()).decode("utf-8")
     session.query(User).delete()
     session.add(User(username=login_username, password_hash=password_hash, name="Administradora"))
+    if password_was_generated:
+        print(f"LOGIN_PASSWORD não definida -- gerei uma senha aleatória.")
     print(f"Usuário de login: {login_username} / senha: {login_password}")
+    print("Anote a senha agora -- ela não fica salva em nenhum arquivo ou log além desta linha do terminal.")
 
     # ---------- Módulo 0: Configurações ----------
     session.query(BusinessConfig).delete()
