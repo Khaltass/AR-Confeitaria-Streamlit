@@ -1,0 +1,14 @@
+# dependências / ambiente
+.venv/
+__pycache__/
+*.pyc
+
+# banco de dados local (SQLite) - faça backup copiando este arquivo manualmente
+/data/
+
+# segredos (nunca commitar)
+.streamlit/secrets.toml
+!.streamlit/secrets.toml.example
+
+# editor / SO
+.DS_Store
