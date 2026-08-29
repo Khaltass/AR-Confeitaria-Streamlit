@@ -81,8 +81,9 @@ receitas_page = st.Page("app_pages/3_Receitas.py", title="Receitas", icon="📖"
 vendas_page = st.Page("app_pages/4_Vendas.py", title="Vendas", icon="🛒")
 caixa_page = st.Page("app_pages/5_Caixa.py", title="Caixa", icon="💰")
 relatorios_page = st.Page("app_pages/6_Relatorios.py", title="Relatórios", icon="📊")
+conta_page = st.Page("app_pages/7_Conta.py", title="Minha conta", icon="👤")
 
 pg = st.navigation(
-    [home_page, config_page, insumos_page, receitas_page, vendas_page, caixa_page, relatorios_page]
+    [home_page, config_page, insumos_page, receitas_page, vendas_page, caixa_page, relatorios_page, conta_page]
 )
 pg.run()

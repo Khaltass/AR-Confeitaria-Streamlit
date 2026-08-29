@@ -4,12 +4,10 @@ Valores centrais usados no cálculo de preço de todas as receitas. Editáveis a
 qualquer momento; mudanças valem só para novos cálculos (vendas já registradas
 guardam seu próprio snapshot de custo, então nada do passado muda retroativamente).
 """
-import bcrypt
 import streamlit as st
 
 from auth import require_login
 from db import ensure_business_config, get_session
-from models import User
 
 require_login()
 
@@ -98,34 +96,5 @@ try:
             config.fixed_cost_rate_constant = fixed_cost_rate_constant
             session.commit()
             st.success("Configurações salvas com sucesso.")
-
-    st.divider()
-    st.subheader("🔒 Alterar senha")
-    st.caption("Troque a senha da sua conta de login. Não afeta nenhum outro dado do sistema.")
-
-    with st.form("change_password_form", clear_on_submit=True):
-        current_password = st.text_input("Senha atual", type="password")
-        new_password = st.text_input("Nova senha", type="password")
-        confirm_password = st.text_input("Confirmar nova senha", type="password")
-        change_submitted = st.form_submit_button("Alterar senha", use_container_width=True)
-
-    if change_submitted:
-        username = st.session_state.get("logged_in_username", "")
-        user = session.query(User).filter(User.username == username).first()
-
-        if user is None or not bcrypt.checkpw(
-            current_password.encode("utf-8"), user.password_hash.encode("utf-8")
-        ):
-            st.error("Senha atual incorreta.")
-        elif len(new_password) < 8:
-            st.error("A nova senha deve ter pelo menos 8 caracteres.")
-        elif new_password != confirm_password:
-            st.error("As senhas não coincidem.")
-        elif new_password == current_password:
-            st.error("A nova senha precisa ser diferente da atual.")
-        else:
-            user.password_hash = bcrypt.hashpw(new_password.encode("utf-8"), bcrypt.gensalt()).decode("utf-8")
-            session.commit()
-            st.toast("Senha alterada com sucesso.", icon="✅")
 finally:
     session.close()
