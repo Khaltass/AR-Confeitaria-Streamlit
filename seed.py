@@ -45,6 +45,8 @@ def get_engine():
     if url:
         if url.startswith("postgres://"):
             url = url.replace("postgres://", "postgresql://", 1)
+        if url.startswith("postgresql://"):
+            url = url.replace("postgresql://", "postgresql+psycopg://", 1)
         return create_engine(url, connect_args={"sslmode": "require"})
     from pathlib import Path
 

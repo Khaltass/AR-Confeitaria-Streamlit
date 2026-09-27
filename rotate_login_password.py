@@ -27,6 +27,8 @@ def get_engine():
         raise SystemExit("Defina DATABASE_URL antes de rodar este script.")
     if url.startswith("postgres://"):
         url = url.replace("postgres://", "postgresql://", 1)
+    if url.startswith("postgresql://"):
+        url = url.replace("postgresql://", "postgresql+psycopg://", 1)
     return create_engine(url, connect_args={"sslmode": "require"})
 
 

@@ -30,9 +30,13 @@ def _get_database_url() -> str | None:
 def get_engine():
     url = _get_database_url()
     if url:
-        # Supabase/Postgres: normaliza o prefixo aceito pelo SQLAlchemy e força SSL.
+        # Supabase/Postgres: normaliza o prefixo aceito pelo SQLAlchemy, força o
+        # driver psycopg (v3) -- tem suporte a versões novas do Python que o
+        # psycopg2-binary demora a acompanhar -- e força SSL.
         if url.startswith("postgres://"):
             url = url.replace("postgres://", "postgresql://", 1)
+        if url.startswith("postgresql://"):
+            url = url.replace("postgresql://", "postgresql+psycopg://", 1)
         connect_args = {"sslmode": "require"} if "sslmode" not in url else {}
         engine = create_engine(url, pool_pre_ping=True, connect_args=connect_args)
     else:
